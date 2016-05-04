@@ -4,27 +4,22 @@ import br.ufrpe.pixengine.core.AbstractGame;
 import br.ufrpe.pixengine.core.GameContainer;
 import br.ufrpe.pixengine.core.Renderer;
 
-public class GameManager extends AbstractGame
-{
-	public GameManager()
-	{
+public class GameManager extends AbstractGame {
+	public GameManager() {
 		push(new PlayState());
 	}
-	
+
 	@Override
-	public void update(GameContainer gc, float dt)
-	{
+	public void update(GameContainer gc, float dt) {
 		peek().update(gc, dt);
 	}
 
 	@Override
-	public void render(GameContainer gc, Renderer r)
-	{
+	public void render(GameContainer gc, Renderer r) {
 		peek().render(gc, r);
 	}
-	
-	public static void main(String args[])
-	{
+
+	public static void main(String args[]) {
 		GameContainer gc = new GameContainer(new GameManager());
 		gc.setWidth(320);
 		gc.setHeight(240);
@@ -37,9 +32,8 @@ public class GameManager extends AbstractGame
 	}
 
 	@Override
-	public void init(GameContainer gc)
-	{
+	public void init(GameContainer gc) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

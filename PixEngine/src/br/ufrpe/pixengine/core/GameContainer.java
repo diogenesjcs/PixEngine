@@ -81,7 +81,7 @@ public class GameContainer implements Runnable {
 				unprocessedTime -= frameCap;
 				render = true;
 
-				if (totalFramesTime >= 1.0) { 
+				if (totalFramesTime >= 1.0) {
 					// Tempo total maior que um segundo
 					totalFramesTime = 0;
 					fps = frameCount;
