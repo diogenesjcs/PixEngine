@@ -1,9 +1,9 @@
-package test;
+package br.ufrpe.pixengine.pong_demo;
 
-import com.majoolwip.core.GameContainer;
-import com.majoolwip.core.Renderer;
-import com.majoolwip.core.components.ObjectManager;
-import com.majoolwip.core.components.State;
+import br.ufrpe.pixengine.components.ObjectManager;
+import br.ufrpe.pixengine.components.State;
+import br.ufrpe.pixengine.core.GameContainer;
+import br.ufrpe.pixengine.core.Renderer;
 
 public class PlayState extends State
 {

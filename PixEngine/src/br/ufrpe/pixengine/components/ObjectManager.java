@@ -1,9 +1,9 @@
-package com.majoolwip.core.components;
+package br.ufrpe.pixengine.components;
 
 import java.util.ArrayList;
 
-import com.majoolwip.core.GameContainer;
-import com.majoolwip.core.Renderer;
+import br.ufrpe.pixengine.core.GameContainer;
+import br.ufrpe.pixengine.core.Renderer;
 
 public class ObjectManager
 {

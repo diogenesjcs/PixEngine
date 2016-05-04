@@ -1,15 +1,15 @@
-package com.majoolwip.core;
+package br.ufrpe.pixengine.core;
 
 import java.awt.image.DataBufferInt;
 import java.util.ArrayList;
 
-import com.majoolwip.core.fx.Font;
-import com.majoolwip.core.fx.Image;
-import com.majoolwip.core.fx.ImageTile;
-import com.majoolwip.core.fx.Light;
-import com.majoolwip.core.fx.LightRequest;
-import com.majoolwip.core.fx.Pixel;
-import com.majoolwip.core.fx.ShadowType;
+import br.ufrpe.pixengine.core.fx.Font;
+import br.ufrpe.pixengine.core.fx.Image;
+import br.ufrpe.pixengine.core.fx.ImageTile;
+import br.ufrpe.pixengine.core.fx.Light;
+import br.ufrpe.pixengine.core.fx.LightRequest;
+import br.ufrpe.pixengine.core.fx.Pixel;
+import br.ufrpe.pixengine.core.fx.ShadowType;
 
 public class Renderer
 {

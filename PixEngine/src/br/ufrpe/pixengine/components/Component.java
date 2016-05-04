@@ -1,7 +1,7 @@
-package com.majoolwip.core.components;
+package br.ufrpe.pixengine.components;
 
-import com.majoolwip.core.GameContainer;
-import com.majoolwip.core.Renderer;
+import br.ufrpe.pixengine.core.GameContainer;
+import br.ufrpe.pixengine.core.Renderer;
 
 public abstract class Component
 {

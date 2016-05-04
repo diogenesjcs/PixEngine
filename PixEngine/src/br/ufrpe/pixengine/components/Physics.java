@@ -1,4 +1,4 @@
-package com.majoolwip.core.components;
+package br.ufrpe.pixengine.components;
 
 import java.util.ArrayList;
 

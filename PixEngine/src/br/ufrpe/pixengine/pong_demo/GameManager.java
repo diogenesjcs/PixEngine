@@ -1,11 +1,8 @@
-package test;
+package br.ufrpe.pixengine.pong_demo;
 
-import java.util.Stack;
-
-import com.majoolwip.core.AbstractGame;
-import com.majoolwip.core.GameContainer;
-import com.majoolwip.core.Renderer;
-import com.majoolwip.core.components.State;
+import br.ufrpe.pixengine.core.AbstractGame;
+import br.ufrpe.pixengine.core.GameContainer;
+import br.ufrpe.pixengine.core.Renderer;
 
 public class GameManager extends AbstractGame
 {
@@ -32,6 +29,7 @@ public class GameManager extends AbstractGame
 		gc.setWidth(320);
 		gc.setHeight(240);
 		gc.setScale(3);
+		gc.setTitle("My Pong!");
 		gc.setClearScreen(true);
 		gc.setLightEnable(false);
 		gc.setDynamicLights(false);

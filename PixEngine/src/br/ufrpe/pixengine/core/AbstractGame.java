@@ -1,8 +1,8 @@
-package com.majoolwip.core;
+package br.ufrpe.pixengine.core;
 
 import java.util.Stack;
 
-import com.majoolwip.core.components.State;
+import br.ufrpe.pixengine.components.State;
 
 
 public abstract class AbstractGame

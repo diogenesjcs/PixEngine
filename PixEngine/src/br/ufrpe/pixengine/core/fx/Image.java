@@ -1,4 +1,4 @@
-package com.majoolwip.core.fx;
+package br.ufrpe.pixengine.core.fx;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;

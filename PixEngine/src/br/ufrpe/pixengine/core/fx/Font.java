@@ -1,4 +1,4 @@
-package com.majoolwip.core.fx;
+package br.ufrpe.pixengine.core.fx;
 
 public enum Font
 {

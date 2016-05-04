@@ -1,9 +1,9 @@
-package test;
+package br.ufrpe.pixengine.pong_demo;
 
-import com.majoolwip.core.GameContainer;
-import com.majoolwip.core.Renderer;
-import com.majoolwip.core.components.Collider;
-import com.majoolwip.core.components.GameObject;
+import br.ufrpe.pixengine.components.Collider;
+import br.ufrpe.pixengine.components.GameObject;
+import br.ufrpe.pixengine.core.GameContainer;
+import br.ufrpe.pixengine.core.Renderer;
 
 public class Enemy extends GameObject
 {

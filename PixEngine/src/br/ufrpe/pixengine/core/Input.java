@@ -1,4 +1,4 @@
-package com.majoolwip.core;
+package br.ufrpe.pixengine.core;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
