@@ -4,7 +4,7 @@ import br.ufrpe.pixengine.core.GameContainer;
 import br.ufrpe.pixengine.core.Renderer;
 
 public class Collider extends Component {
-	private GameObject object;
+	private GameObject object; 
 	private float x, y, hW, hH;
 
 	public Collider() {

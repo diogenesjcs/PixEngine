@@ -4,7 +4,7 @@ import br.ufrpe.pixengine.core.GameContainer;
 import br.ufrpe.pixengine.core.Renderer;
 
 public abstract class Component {
-	protected String tag = null;
+	protected String tag = null; 
 
 	public abstract void update(GameContainer gc, GameObject object, float dt);
 
