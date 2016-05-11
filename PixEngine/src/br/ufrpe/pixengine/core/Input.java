@@ -1,12 +1,11 @@
 package br.ufrpe.pixengine.core;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import javafx.event.EventHandler;
+import javafx.scene.input.InputEvent;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 
-public class Input implements KeyListener, MouseListener, MouseMotionListener {
+public class Input implements EventHandler<InputEvent> {
 	private GameContainer gc;
 
 	private boolean[] keys = new boolean[256];
@@ -66,7 +65,7 @@ public class Input implements KeyListener, MouseListener, MouseMotionListener {
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent e) {
+	public void mouseClicked(javafx.scene.input.MouseEvent e) {
 
 	}
 
@@ -120,5 +119,14 @@ public class Input implements KeyListener, MouseListener, MouseMotionListener {
 	public void setMouseY(int mouseY) {
 		this.mouseY = mouseY;
 	}
+
+    @Override
+    public void handle(InputEvent event) {
+        if (event.) {
+            
+        }
+        // TODO Auto-generated method stub
+        
+    }
 
 }

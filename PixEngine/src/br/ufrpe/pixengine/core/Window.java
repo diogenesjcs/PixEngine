@@ -1,32 +1,42 @@
 package br.ufrpe.pixengine.core;
 
 import java.awt.BorderLayout;
-import java.awt.Canvas;
-import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
-import javax.swing.JFrame;
+import javafx.event.EventHandler;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.InputEvent;
+import javafx.stage.Stage;
 
 public class Window {
-	private JFrame frame;
+	private Stage frame;
+	private Scene mainScene;
 	private Canvas canvas;
 	private BufferedImage image;
-	private Graphics g;
+	private GraphicsContext g;
 	private BufferStrategy bs;
 
-	public Window(GameContainer gc) {
+	public Window(GameContainer gc, Stage primaryStage) {
 		image = new BufferedImage(gc.getWidth(), gc.getHeight(), BufferedImage.TYPE_INT_RGB);
 
-		canvas = new Canvas();
-		Dimension s = new Dimension((int) (gc.getWidth() * gc.getScale()), (int) (gc.getHeight() * gc.getScale()));
-		canvas.setPreferredSize(s);
-		canvas.setMaximumSize(s);
-		canvas.setPreferredSize(s);
+		frame = primaryStage;
+        frame.setTitle(gc.getTitle());
 
-		frame = new JFrame(gc.getTitle());
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Group root = new Group();
+	    mainScene = new Scene(root);
+	    frame.setScene(mainScene);
+	 
+	    canvas = new Canvas();
+	    root.getChildren().add(canvas);
+		
+		canvas.setWidth(gc.getWidth() * gc.getScale());
+		canvas.setHeight(gc.getHeight() * gc.getScale());
+
+		
 		frame.setLayout(new BorderLayout());
 		frame.add(canvas, BorderLayout.CENTER);
 		frame.pack();
@@ -40,7 +50,7 @@ public class Window {
 	}
 
 	public void update() {
-		g.drawImage(image, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
+		g.drawImage(image, 0, 0, canvas.getWidth(), canvas.getHeight());
 		bs.show();
 	}
 
@@ -51,10 +61,10 @@ public class Window {
 		frame.dispose();
 	}
 
-	public Canvas getCanvas() {
-		return canvas;
+	public void addEventHandler(EventHandler<? extends InputEvent> eh) {
+	    this.mainScene.addEventHandler(eventType, eventHandler);
 	}
-
+	
 	public BufferedImage getImage() {
 		return image;
 	}

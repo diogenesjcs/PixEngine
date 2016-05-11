@@ -3,6 +3,7 @@ package br.ufrpe.pixengine.core;
 import java.awt.event.KeyEvent;
 
 import br.ufrpe.pixengine.components.Physics;
+import javafx.stage.Stage;
 
 public class GameContainer implements Runnable {
 	private Thread thread;
@@ -24,15 +25,15 @@ public class GameContainer implements Runnable {
 	private boolean clearScreen = false;
 	private boolean debug = false;
 
-	public GameContainer(AbstractGame game) {
+	public GameContainer(AbstractGame game, Stage mainStage) {
 		this.game = game;
+		window = new Window(this, mainStage);
 	}
 
 	public void start() {
 		if (isRunning)
 			return;
 
-		window = new Window(this);
 		renderer = new Renderer(this);
 		input = new Input(this);
 		physics = new Physics();
