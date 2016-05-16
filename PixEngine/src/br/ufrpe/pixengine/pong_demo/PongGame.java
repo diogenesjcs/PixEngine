@@ -11,7 +11,7 @@ public class PongGame extends Application {
         GameContainer gc = new GameContainer(new GameManager(), primaryStage);
         gc.setWidth(320);
         gc.setHeight(240);
-        gc.setScale(2);
+        gc.setScale(3);
         gc.setTitle("My Pong!");
         gc.setClearScreen(true);
         gc.setLightEnable(false);
