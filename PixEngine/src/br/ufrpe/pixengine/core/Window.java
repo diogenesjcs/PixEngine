@@ -1,34 +1,27 @@
 package br.ufrpe.pixengine.core;
 
-import java.awt.BorderLayout;
-import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
-
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.InputEvent;
+import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
 
 public class Window {
-	private Stage frame;
+	private Stage mainStage;
 	private Scene mainScene;
 	private Canvas canvas;
-	private BufferedImage image;
+	private WritableImage img;
 	private GraphicsContext g;
-	private BufferStrategy bs;
 
 	public Window(GameContainer gc, Stage primaryStage) {
-		image = new BufferedImage(gc.getWidth(), gc.getHeight(), BufferedImage.TYPE_INT_RGB);
+	    img = new WritableImage(gc.getWidth(), gc.getHeight());
 
-		frame = primaryStage;
-        frame.setTitle(gc.getTitle());
+		mainStage = primaryStage;
+        mainStage.setTitle(gc.getTitle());
 
         Group root = new Group();
 	    mainScene = new Scene(root);
-	    frame.setScene(mainScene);
 	 
 	    canvas = new Canvas();
 	    root.getChildren().add(canvas);
@@ -36,36 +29,30 @@ public class Window {
 		canvas.setWidth(gc.getWidth() * gc.getScale());
 		canvas.setHeight(gc.getHeight() * gc.getScale());
 
+		mainStage.setWidth(canvas.getWidth());
+		mainStage.setHeight(canvas.getHeight());
+		mainStage.setScene(mainScene);
 		
-		frame.setLayout(new BorderLayout());
-		frame.add(canvas, BorderLayout.CENTER);
-		frame.pack();
-		frame.setLocationRelativeTo(null);
-		frame.setResizable(false);
-		frame.setVisible(true);
+		mainStage.setResizable(false);
+		mainStage.show();
 
-		canvas.createBufferStrategy(1);
-		bs = canvas.getBufferStrategy();
-		g = bs.getDrawGraphics();
+		g = canvas.getGraphicsContext2D();
 	}
 
 	public void update() {
-		g.drawImage(image, 0, 0, canvas.getWidth(), canvas.getHeight());
-		bs.show();
+		g.drawImage(img, 0, 0, canvas.getWidth(), canvas.getHeight());
 	}
 
 	public void cleanUp() {
-		g.dispose();
-		bs.dispose();
-		image.flush();
-		frame.dispose();
+		img.cancel();
+		mainStage.close();
 	}
 
-	public void addEventHandler(EventHandler<? extends InputEvent> eh) {
-	    this.mainScene.addEventHandler(eventType, eventHandler);
-	}
+    public Canvas getCanvas() {
+        return canvas;
+    }
 	
-	public BufferedImage getImage() {
-		return image;
+    public WritableImage getImage() {
+		return this.img;
 	}
 }

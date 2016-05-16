@@ -1,8 +1,7 @@
 package br.ufrpe.pixengine.core;
 
-import java.awt.event.KeyEvent;
-
 import br.ufrpe.pixengine.components.Physics;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 public class GameContainer implements Runnable {
@@ -73,7 +72,7 @@ public class GameContainer implements Runnable {
 			totalFramesTime += passedTime;
 
 			while (unprocessedTime >= frameCap) {
-				if (input.isKeyPressed(KeyEvent.VK_F2))
+				if (input.isKeyPressed(KeyCode.F2.ordinal()))
 					debug = !debug;
 
 				game.update(this, (float) frameCap);

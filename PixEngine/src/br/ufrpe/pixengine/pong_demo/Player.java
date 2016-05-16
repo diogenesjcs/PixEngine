@@ -1,11 +1,10 @@
 package br.ufrpe.pixengine.pong_demo;
 
-import java.awt.event.KeyEvent;
-
 import br.ufrpe.pixengine.components.Collider;
 import br.ufrpe.pixengine.components.GameObject;
 import br.ufrpe.pixengine.core.GameContainer;
 import br.ufrpe.pixengine.core.Renderer;
+import javafx.scene.input.KeyCode;
 
 public class Player extends GameObject {
 	public Player(int x, int y) {
@@ -19,7 +18,7 @@ public class Player extends GameObject {
 
 	@Override
 	public void update(GameContainer gc, float dt) {
-		if (gc.getInput().isKey(KeyEvent.VK_W)) {
+		if (gc.getInput().isKey(KeyCode.W.ordinal())) {
 			y -= 75 * dt;
 
 			if (y < 0) {
@@ -27,7 +26,7 @@ public class Player extends GameObject {
 			}
 		}
 
-		if (gc.getInput().isKey(KeyEvent.VK_S)) {
+		if (gc.getInput().isKey(KeyCode.S.ordinal())) {
 			y += 75 * dt;
 
 			if (y + h > gc.getHeight()) {

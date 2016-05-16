@@ -1,6 +1,7 @@
 package br.ufrpe.pixengine.core;
 
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.scene.input.InputEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -18,9 +19,20 @@ public class Input implements EventHandler<InputEvent> {
 
 	public Input(GameContainer gc) {
 		this.gc = gc;
-		gc.getWindow().getCanvas().addKeyListener(this);
-		gc.getWindow().getCanvas().addMouseListener(this);
-		gc.getWindow().getCanvas().addMouseMotionListener(this);
+		
+		// Key events
+		gc.getWindow().getCanvas().setOnKeyPressed(this);
+		gc.getWindow().getCanvas().setOnKeyReleased(this);
+		gc.getWindow().getCanvas().setOnKeyTyped(this);
+		
+		// Mouse events
+		gc.getWindow().getCanvas().setOnMousePressed(this);
+		gc.getWindow().getCanvas().setOnMouseReleased(this);
+		gc.getWindow().getCanvas().setOnMouseClicked(this);
+		gc.getWindow().getCanvas().setOnMouseDragged(this);
+		gc.getWindow().getCanvas().setOnMouseEntered(this);
+		gc.getWindow().getCanvas().setOnMouseExited(this);
+		gc.getWindow().getCanvas().setOnMouseMoved(this);
 	}
 
 	public void update() {
@@ -52,56 +64,24 @@ public class Input implements EventHandler<InputEvent> {
 		return !buttons[button] && buttonsLast[button];
 	}
 
-	@Override
-	public void mouseDragged(MouseEvent e) {
-		mouseX = (int) (e.getX() / gc.getScale());
-		mouseY = (int) (e.getY() / gc.getScale());
+	public void mouseClicked(MouseEvent e) {
+	    // Not implemented yet
 	}
 
-	@Override
-	public void mouseMoved(MouseEvent e) {
-		mouseX = (int) (e.getX() / gc.getScale());
-		mouseY = (int) (e.getY() / gc.getScale());
-	}
-
-	@Override
-	public void mouseClicked(javafx.scene.input.MouseEvent e) {
-
-	}
-
-	@Override
 	public void mouseEntered(MouseEvent e) {
-
+	    // Not implemented yet
 	}
 
-	@Override
 	public void mouseExited(MouseEvent e) {
-
+	    // Not implemented yet
 	}
 
-	@Override
 	public void mousePressed(MouseEvent e) {
-		buttons[e.getButton()] = true;
+		buttons[e.getButton().ordinal()] = true;
 	}
 
-	@Override
 	public void mouseReleased(MouseEvent e) {
-		buttons[e.getButton()] = false;
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		keys[e.getKeyCode()] = true;
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		keys[e.getKeyCode()] = false;
-	}
-
-	@Override
-	public void keyTyped(KeyEvent arg0) {
-
+		buttons[e.getButton().ordinal()] = false;
 	}
 
 	public int getMouseX() {
@@ -122,11 +102,28 @@ public class Input implements EventHandler<InputEvent> {
 
     @Override
     public void handle(InputEvent event) {
-        if (event.) {
-            
-        }
-        // TODO Auto-generated method stub
-        
+        EventType<? extends InputEvent> eventType = event.getEventType();
+        if (eventType.equals(KeyEvent.KEY_PRESSED) 
+                || eventType.equals(KeyEvent.KEY_RELEASED)) {
+            keys[((KeyEvent) event).getCode().ordinal()] = true;
+        } else if (eventType.equals(KeyEvent.KEY_TYPED)) {
+            // Not implemented yet
+        } else if (eventType.equals(MouseEvent.MOUSE_DRAGGED) 
+                || eventType.equals(MouseEvent.MOUSE_MOVED)) {
+            MouseEvent e = (MouseEvent) event;
+            mouseX = (int) (e.getX() / gc.getScale());
+            mouseY = (int) (e.getY() / gc.getScale());
+        } else if (eventType.equals(MouseEvent.MOUSE_ENTERED)) {
+            // Not implemented yet            
+        } else if (eventType.equals(MouseEvent.MOUSE_EXITED)) {
+            // Not implemented yet            
+        } else if (eventType.equals(MouseEvent.MOUSE_CLICKED)) {
+            // Not implemented yet            
+        } else if (eventType.equals(MouseEvent.MOUSE_PRESSED)) {
+            // Not implemented yet
+        } else if (eventType.equals(MouseEvent.MOUSE_RELEASED)) {
+            // Not implemented yet
+        } 
     }
 
 }
