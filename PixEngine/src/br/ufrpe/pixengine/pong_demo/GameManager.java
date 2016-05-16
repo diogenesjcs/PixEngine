@@ -3,6 +3,7 @@ package br.ufrpe.pixengine.pong_demo;
 import br.ufrpe.pixengine.core.AbstractGame;
 import br.ufrpe.pixengine.core.GameContainer;
 import br.ufrpe.pixengine.core.Renderer;
+import javafx.stage.WindowEvent;
 
 public class GameManager extends AbstractGame {
     
@@ -24,4 +25,5 @@ public class GameManager extends AbstractGame {
 	public void init(GameContainer gc) {
 		// TODO Auto-generated method stub
 	}
+
 }

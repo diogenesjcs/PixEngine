@@ -1,5 +1,6 @@
 package br.ufrpe.pixengine.core;
 
+import java.awt.image.DataBufferInt;
 import java.util.ArrayList;
 
 import br.ufrpe.pixengine.core.fx.Font;
@@ -9,7 +10,6 @@ import br.ufrpe.pixengine.core.fx.Light;
 import br.ufrpe.pixengine.core.fx.LightRequest;
 import br.ufrpe.pixengine.core.fx.Pixel;
 import br.ufrpe.pixengine.core.fx.ShadowType;
-import javafx.scene.image.PixelFormat;
 
 public class Renderer {
 	private GameContainer gc;
@@ -32,18 +32,7 @@ public class Renderer {
 		this.gc = gc;
 		width = gc.getWidth();
 		height = gc.getHeight();
-		pixels = new int[width * height * 4];
-		gc.getWindow().getImage().getPixelReader().getPixels(
-		        0,
-		        0,
-		        width,
-		        height,
-		        PixelFormat.getIntArgbInstance(),
-		        pixels,
-		        0,
-		        width * 4
-		);
-		
+		pixels = ((DataBufferInt) gc.getWindow().getImage().getRaster().getDataBuffer()).getData();
 		lightMap = new int[pixels.length];
 		shadowMap = new ShadowType[pixels.length];
 	}

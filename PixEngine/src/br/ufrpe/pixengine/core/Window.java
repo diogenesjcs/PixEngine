@@ -1,36 +1,37 @@
 package br.ufrpe.pixengine.core;
 
+import java.awt.image.BufferedImage;
+
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.WritableImage;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class Window {
 	private Stage mainStage;
 	private Scene mainScene;
 	private Canvas canvas;
-	private WritableImage img;
+	private BufferedImage image;
+	private WritableImage wImage;
 	private GraphicsContext g;
 
 	public Window(GameContainer gc, Stage primaryStage) {
-	    img = new WritableImage(gc.getWidth(), gc.getHeight());
-
+	    image = new BufferedImage(gc.getWidth(), gc.getHeight(), BufferedImage.TYPE_INT_RGB);
+	    wImage = new WritableImage(gc.getWidth(), gc.getHeight());
+	    
 		mainStage = primaryStage;
         mainStage.setTitle(gc.getTitle());
 
         Group root = new Group();
-	    mainScene = new Scene(root);
+	    mainScene = new Scene(root, Color.BLACK);
 	 
-	    canvas = new Canvas();
+	    canvas = new Canvas(gc.getWidth() * gc.getScale(), gc.getHeight() * gc.getScale());
 	    root.getChildren().add(canvas);
 		
-		canvas.setWidth(gc.getWidth() * gc.getScale());
-		canvas.setHeight(gc.getHeight() * gc.getScale());
-
-		mainStage.setWidth(canvas.getWidth());
-		mainStage.setHeight(canvas.getHeight());
 		mainStage.setScene(mainScene);
 		
 		mainStage.setResizable(false);
@@ -40,19 +41,28 @@ public class Window {
 	}
 
 	public void update() {
-		g.drawImage(img, 0, 0, canvas.getWidth(), canvas.getHeight());
+	    SwingFXUtils.toFXImage(image, wImage);
+		g.drawImage(wImage, 0, 0, canvas.getWidth(), canvas.getHeight());
 	}
 
 	public void cleanUp() {
-		img.cancel();
+	    image.flush();
 		mainStage.close();
 	}
 
     public Canvas getCanvas() {
         return canvas;
     }
-	
-    public WritableImage getImage() {
-		return this.img;
+
+    public Scene getScene() {
+        return this.mainScene;
+    }
+    
+    public BufferedImage getImage() {
+		return this.image;
 	}
+
+    public Stage getMainStage() {
+        return mainStage;
+    }
 }

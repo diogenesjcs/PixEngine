@@ -46,6 +46,8 @@ public class GameContainer implements Runnable {
 			return;
 
 		isRunning = false;
+		
+		this.window.getMainStage().close();
 	}
 
 	public void run() {

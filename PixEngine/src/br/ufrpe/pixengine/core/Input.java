@@ -21,18 +21,18 @@ public class Input implements EventHandler<InputEvent> {
 		this.gc = gc;
 		
 		// Key events
-		gc.getWindow().getCanvas().setOnKeyPressed(this);
-		gc.getWindow().getCanvas().setOnKeyReleased(this);
-		gc.getWindow().getCanvas().setOnKeyTyped(this);
+		gc.getWindow().getScene().setOnKeyPressed(this);
+		gc.getWindow().getScene().setOnKeyReleased(this);
+		gc.getWindow().getScene().setOnKeyTyped(this);
 		
 		// Mouse events
-		gc.getWindow().getCanvas().setOnMousePressed(this);
-		gc.getWindow().getCanvas().setOnMouseReleased(this);
-		gc.getWindow().getCanvas().setOnMouseClicked(this);
-		gc.getWindow().getCanvas().setOnMouseDragged(this);
-		gc.getWindow().getCanvas().setOnMouseEntered(this);
-		gc.getWindow().getCanvas().setOnMouseExited(this);
-		gc.getWindow().getCanvas().setOnMouseMoved(this);
+		gc.getWindow().getScene().setOnMousePressed(this);
+		gc.getWindow().getScene().setOnMouseReleased(this);
+		gc.getWindow().getScene().setOnMouseClicked(this);
+		gc.getWindow().getScene().setOnMouseDragged(this);
+		gc.getWindow().getScene().setOnMouseEntered(this);
+		gc.getWindow().getScene().setOnMouseExited(this);
+		gc.getWindow().getScene().setOnMouseMoved(this);
 	}
 
 	public void update() {
@@ -103,9 +103,10 @@ public class Input implements EventHandler<InputEvent> {
     @Override
     public void handle(InputEvent event) {
         EventType<? extends InputEvent> eventType = event.getEventType();
-        if (eventType.equals(KeyEvent.KEY_PRESSED) 
-                || eventType.equals(KeyEvent.KEY_RELEASED)) {
+        if (eventType.equals(KeyEvent.KEY_PRESSED)) {
             keys[((KeyEvent) event).getCode().ordinal()] = true;
+        } else if (eventType.equals(KeyEvent.KEY_RELEASED)) {
+            keys[((KeyEvent) event).getCode().ordinal()] = false;
         } else if (eventType.equals(KeyEvent.KEY_TYPED)) {
             // Not implemented yet
         } else if (eventType.equals(MouseEvent.MOUSE_DRAGGED) 
@@ -120,9 +121,9 @@ public class Input implements EventHandler<InputEvent> {
         } else if (eventType.equals(MouseEvent.MOUSE_CLICKED)) {
             // Not implemented yet            
         } else if (eventType.equals(MouseEvent.MOUSE_PRESSED)) {
-            // Not implemented yet
+            buttons[((MouseEvent) event).getButton().ordinal()] = true;
         } else if (eventType.equals(MouseEvent.MOUSE_RELEASED)) {
-            // Not implemented yet
+            buttons[((MouseEvent) event).getButton().ordinal()] = false;
         } 
     }
 
