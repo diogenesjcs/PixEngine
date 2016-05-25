@@ -5,6 +5,7 @@ import br.ufrpe.pixengine.components.GameObject;
 import br.ufrpe.pixengine.core.GameContainer;
 import br.ufrpe.pixengine.core.Renderer;
 import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
 
 public class Player extends GameObject {
 	public Player(int x, int y) {
@@ -39,7 +40,7 @@ public class Player extends GameObject {
 
 	@Override
 	public void render(GameContainer gc, Renderer r) {
-		r.drawFillRect((int) x, (int) y, (int) w, (int) h, 0xffffffff);
+		r.drawRect((int) x, (int) y, (int) w, (int) h, Color.AQUA, 2.0);
 	}
 
 	@Override

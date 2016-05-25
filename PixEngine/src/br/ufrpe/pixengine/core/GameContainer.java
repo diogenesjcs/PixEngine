@@ -2,6 +2,7 @@ package br.ufrpe.pixengine.core;
 
 import br.ufrpe.pixengine.components.Physics;
 import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class GameContainer implements Runnable {
@@ -99,7 +100,7 @@ public class GameContainer implements Runnable {
 				
 				renderer.setTranslate(false);
 				if (debug)
-					renderer.drawString("FPS-" + fps, 0xffffffff, 0, 0);
+					renderer.drawString("FPS-" + fps, Color.PALEGREEN, 0, 30, 14);
 				renderer.setTranslate(true);
 
 				window.update();

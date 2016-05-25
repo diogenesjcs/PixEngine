@@ -4,6 +4,7 @@ import br.ufrpe.pixengine.components.Collider;
 import br.ufrpe.pixengine.components.GameObject;
 import br.ufrpe.pixengine.core.GameContainer;
 import br.ufrpe.pixengine.core.Renderer;
+import javafx.scene.paint.Color;
 
 public class Enemy extends GameObject {
 	private GameObject target = null;
@@ -34,7 +35,7 @@ public class Enemy extends GameObject {
 
 	@Override
 	public void render(GameContainer gc, Renderer r) {
-		r.drawFillRect((int) x, (int) y, (int) w, (int) h, 0xffff0000);
+		r.drawFillRect((int) x, (int) y, (int) w, (int) h, Color.VIOLET);
 	}
 
 	@Override
