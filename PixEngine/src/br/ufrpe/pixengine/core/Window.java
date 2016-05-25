@@ -61,6 +61,10 @@ public class Window {
     public BufferedImage getImage() {
 		return this.image;
 	}
+    
+    public WritableImage getWImage() {
+        return this.wImage;
+    }
 
     public Stage getMainStage() {
         return mainStage;

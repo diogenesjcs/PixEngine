@@ -7,7 +7,6 @@ import javax.imageio.ImageIO;
 
 public class Image {
 	public int width, height;
-	public ShadowType shadowType = ShadowType.NONE;
 	public int[] pixels;
 
 	public Image(String path) {

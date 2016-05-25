@@ -1,42 +1,53 @@
 package br.ufrpe.pixengine.core;
 
 import java.awt.image.DataBufferInt;
-import java.util.ArrayList;
 
 import br.ufrpe.pixengine.core.fx.Font;
 import br.ufrpe.pixengine.core.fx.Image;
 import br.ufrpe.pixengine.core.fx.ImageTile;
-import br.ufrpe.pixengine.core.fx.Light;
-import br.ufrpe.pixengine.core.fx.LightRequest;
-import br.ufrpe.pixengine.core.fx.Pixel;
-import br.ufrpe.pixengine.core.fx.ShadowType;
+import javafx.scene.image.PixelReader;
 
 public class Renderer {
 	private GameContainer gc;
-
 	private int width, height;
-	private int[] pixels;
-	private int[] lightMap;
-	private ShadowType[] shadowMap;
-	private Font font = Font.STANDARD;
-	private int ambientLight = Pixel.getColor(1, 0.1f, 0.1f, 0.1f);
 	private int clearColor = 0xff000000;
+    private Font font = Font.STANDARD;
+	
+	private int[] pixels;
+//	private int[] lightMap;
+//	private ShadowType[] shadowMap;
+//	private int ambientLight = Pixel.getColor(1, 0.1f, 0.1f, 0.1f);
+//	private ArrayList<LightRequest> lightRequests = new ArrayList<LightRequest>();
 
 	private int transX, transY;
-
 	private boolean translate = true;
-
-	private ArrayList<LightRequest> lightRequests = new ArrayList<LightRequest>();
+    private PixelReader pixelWriter;
 
 	public Renderer(GameContainer gc) {
 		this.gc = gc;
 		width = gc.getWidth();
 		height = gc.getHeight();
+		
 		pixels = ((DataBufferInt) gc.getWindow().getImage().getRaster().getDataBuffer()).getData();
-		lightMap = new int[pixels.length];
-		shadowMap = new ShadowType[pixels.length];
+//		lightMap = new int[pixels.length];
+//		shadowMap = new ShadowType[pixels.length];
+		
+//		this.pixelWriter = gc.getWindow().getWImage().getPixelReader();
 	}
 
+	public void setPixel(int x, int y, int color) {
+        if (translate) {
+            x -= transX;
+            y -= transY;
+        }
+
+        if ((x < 0 || x >= width || y < 0 || y >= height) || color == 0xffff00ff)
+            return;
+
+        pixels[x + y * width] = color;
+    }
+	
+/*
 	public void setPixel(int x, int y, int color, ShadowType shadowType) {
 		if (translate) {
 			x -= transX;
@@ -68,7 +79,7 @@ public class Renderer {
 
 		lightMap[x + y * width] = Pixel.getMax(color, lightMap[x + y * width]);
 	}
-
+*/
 	public void drawString(String text, int color, int offX, int offY) {
 		text = text.toUpperCase();
 
@@ -79,7 +90,7 @@ public class Renderer {
 			for (int x = 0; x < font.widths[unicode]; x++) {
 				for (int y = 1; y < font.image.height; y++) {
 					if (font.image.pixels[(x + font.offsets[unicode]) + y * font.image.width] == 0xffffffff)
-						setPixel(x + offX + offset, y + offY - 1, color, ShadowType.NONE);
+						setPixel(x + offX + offset, y + offY - 1, color);
 				}
 			}
 
@@ -87,6 +98,14 @@ public class Renderer {
 		}
 	}
 
+	public void clear() {
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                pixels[x + y * width] = clearColor;
+            }
+        }
+    }
+/*	
 	public void clear() {
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
@@ -112,11 +131,11 @@ public class Renderer {
 
 		lightRequests.clear();
 	}
-
+*/
 	public void drawImage(Image image, int offX, int offY) {
 		for (int x = 0; x < image.width; x++) {
 			for (int y = 0; y < image.height; y++) {
-				setPixel(x + offX, y + offY, image.pixels[x + y * image.width], image.shadowType);
+				setPixel(x + offX, y + offY, image.pixels[x + y * image.width]);
 			}
 		}
 	}
@@ -125,32 +144,31 @@ public class Renderer {
 		for (int x = 0; x < image.tileWidth; x++) {
 			for (int y = 0; y < image.tileHeight; y++) {
 				setPixel(x + offX, y + offY,
-						image.pixels[(x + (tileX * image.tileWidth)) + (y + (tileY * image.tileHeight)) * image.width],
-						image.shadowType);
+						image.pixels[(x + (tileX * image.tileWidth)) + (y + (tileY * image.tileHeight)) * image.width]);
 			}
 		}
 	}
 
-	public void drawRect(int offX, int offY, int w, int h, int color, ShadowType type) {
+	public void drawRect(int offX, int offY, int w, int h, int color) {
 		for (int x = 0; x <= w; x++) {
-			setPixel(x + offX, offY, color, type);
-			setPixel(x + offX, offY + h, color, type);
+			setPixel(x + offX, offY, color);
+			setPixel(x + offX, offY + h, color);
 		}
 
 		for (int y = 0; y <= h; y++) {
-			setPixel(offX, y + offY, color, type);
-			setPixel(offX + w, y + offY, color, type);
+			setPixel(offX, y + offY, color);
+			setPixel(offX + w, y + offY, color);
 		}
 	}
 
-	public void drawFillRect(int offX, int offY, int w, int h, int color, ShadowType type) {
+	public void drawFillRect(int offX, int offY, int w, int h, int color) {
 		for (int x = 0; x < w; x++) {
 			for (int y = 0; y < h; y++) {
-				setPixel(x + offX, y + offY, color, type);
+				setPixel(x + offX, y + offY, color);
 			}
 		}
 	}
-
+/*
 	public void drawLight(Light light, int offX, int offY) {
 		if (gc.isDynamicLights() || gc.isLightEnable())
 			lightRequests.add(new LightRequest(light, offX, offY));
@@ -237,7 +255,7 @@ public class Renderer {
 	public void setAmbientLight(int ambientLight) {
 		this.ambientLight = ambientLight;
 	}
-
+*/
 	public int getClearColor() {
 		return clearColor;
 	}
@@ -273,11 +291,19 @@ public class Renderer {
 	public void drawImage(Image image) {
 		drawImage(image, 0, 0);
 	}
+//	
+//	public void drawFxImage(javafx.scene.image.Image image, int offX, int offY) {
+//	    for (int x = 0; x < image.getWidth(); x++) {
+//            for (int y = 0; y < image.getHeight(); y++) {
+//                setPixel(x + offX, y + offY, image.getpixels[x + y * image.getWidth()]);
+//            }
+//        }
+//	}
 
 	public void drawImageTile(ImageTile image, int tileX, int tileY) {
 		drawImageTile(image, 0, 0, tileX, tileY);
 	}
-
+/*
 	public void drawLight(Light light) {
 		drawLight(light, 0, 0);
 	}
@@ -285,7 +311,7 @@ public class Renderer {
 	public void drawFillRect(int offX, int offY, int w, int h, int color) {
 		drawFillRect(offX, offY, w, h, color, ShadowType.NONE);
 	}
-
+*/
 	public boolean isTranslate() {
 		return translate;
 	}

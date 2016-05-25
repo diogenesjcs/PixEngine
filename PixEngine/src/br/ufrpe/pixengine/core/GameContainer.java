@@ -12,8 +12,8 @@ public class GameContainer implements Runnable {
 	private Input input;
 	private Physics physics;
 
-	private int width = 320, height = 240;
-	private float scale = 2.0f;
+	private int width = 640, height = 480;
+	private float scale = 1.0f;
 	private String title = "Game title";
 	private double frameCap = 1.0 / 60.0;
 	private boolean isRunning = false;
@@ -96,10 +96,7 @@ public class GameContainer implements Runnable {
 					renderer.clear();
 
 				game.render(this, renderer);
-				if (lightEnable || dynamicLights) {
-					renderer.drawLightArray();
-					renderer.flushMaps();
-				}
+				
 				renderer.setTranslate(false);
 				if (debug)
 					renderer.drawString("FPS-" + fps, 0xffffffff, 0, 0);

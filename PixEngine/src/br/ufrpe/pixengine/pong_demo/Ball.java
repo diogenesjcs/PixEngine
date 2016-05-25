@@ -4,8 +4,12 @@ import br.ufrpe.pixengine.components.Collider;
 import br.ufrpe.pixengine.components.GameObject;
 import br.ufrpe.pixengine.core.GameContainer;
 import br.ufrpe.pixengine.core.Renderer;
+import br.ufrpe.pixengine.core.fx.SpriteAnimation;
+import javafx.util.Duration;
 
 public class Ball extends GameObject {
+    private SpriteAnimation ballAnimatedImg;
+    private boolean isRolling = false; 
 	boolean left = true;
 	float speedY = 0;
 
@@ -15,11 +19,18 @@ public class Ball extends GameObject {
 		this.y = y;
 		w = 16;
 		h = 16;
+		this.ballAnimatedImg = new SpriteAnimation("ball_sprite.png", Duration.millis(1000), 9, 2, 0, 0, 64, 64);
 		addComponent(new Collider());
 	}
 
 	@Override
 	public void update(GameContainer gc, float dt) {
+//	    if (!isRolling) {
+//	        Node n = this.ballAnimatedImg.getImageView();
+//          gc.getWindow().addPaintableNodeToCanvas(n);
+//          this.ballAnimatedImg.play();
+//	        isRolling = true;
+//        }
 		if (left) {
 			x -= dt * 50;
 		} else {
@@ -38,6 +49,8 @@ public class Ball extends GameObject {
 			speedY *= -1;
 		}
 
+		this.ballAnimatedImg.getImageView().setX(x);
+		this.ballAnimatedImg.getImageView().setX(y);
 		updateComponents(gc, dt);
 	}
 
