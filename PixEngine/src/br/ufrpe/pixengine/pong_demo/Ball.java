@@ -18,8 +18,8 @@ public class Ball extends GameObject {
 		this.y = y;
 		w = 64;
 		h = 60;
-		this.ballAnimatedImg = new AnimatedImage("ball_sprite.png", 
-		        1200, 9, 2, 0, 0, (int) w, (int) h);
+		this.ballAnimatedImg = new AnimatedImage("body.png", 
+		        1200, 9, 9, 0, 0, (int) w, (int) h);
 		addComponent(new Collider());
 	}
 
