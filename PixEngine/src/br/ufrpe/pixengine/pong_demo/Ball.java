@@ -4,8 +4,11 @@ import br.ufrpe.pixengine.components.Collider;
 import br.ufrpe.pixengine.components.GameObject;
 import br.ufrpe.pixengine.core.GameContainer;
 import br.ufrpe.pixengine.core.Renderer;
+import br.ufrpe.pixengine.core.fx.AnimatedImage;
+import javafx.geometry.Rectangle2D;
 
 public class Ball extends GameObject {
+    private AnimatedImage ballAnimatedImg;
 	boolean left = true;
 	float speedY = 0;
 
@@ -13,8 +16,10 @@ public class Ball extends GameObject {
 		setTag("ball");
 		this.x = x;
 		this.y = y;
-		w = 16;
-		h = 16;
+		w = 64;
+		h = 60;
+		this.ballAnimatedImg = new AnimatedImage("ball_sprite.png", 
+		        1200, 9, 2, 0, 0, (int) w, (int) h);
 		addComponent(new Collider());
 	}
 
@@ -38,12 +43,16 @@ public class Ball extends GameObject {
 			speedY *= -1;
 		}
 
+		this.ballAnimatedImg.nextFrame(dt);
 		updateComponents(gc, dt);
 	}
 
 	@Override
 	public void render(GameContainer gc, Renderer r) {
-		r.drawFillRect((int) x, (int) y, (int) w, (int) h, 0xff00ff00);
+	    Rectangle2D pos = this.ballAnimatedImg.getCurrentFramePosition();
+	    r.drawImage(this.ballAnimatedImg.getImage(), 
+	            pos.getMinX(), pos.getMinY(), pos.getWidth(), pos.getHeight(),
+	            x, y, pos.getWidth(), pos.getHeight());
 	}
 
 	@Override

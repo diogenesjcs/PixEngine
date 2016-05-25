@@ -9,13 +9,14 @@ public class PongGame extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         GameContainer gc = new GameContainer(new GameManager(), primaryStage);
-        gc.setWidth(320);
-        gc.setHeight(240);
-        gc.setScale(3);
+        gc.setWidth(640);
+        gc.setHeight(480);
+        gc.setScale(2);
         gc.setTitle("My Pong!");
         gc.setClearScreen(true);
         gc.setLightEnable(false);
         gc.setDynamicLights(false);
+        gc.setLockFrameRate(true);
         gc.start();
         primaryStage.setOnCloseRequest(e -> exitPlatform(primaryStage));
     }
