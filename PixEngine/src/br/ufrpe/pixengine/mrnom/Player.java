@@ -53,7 +53,7 @@ public class Player extends GameObject {
 	
 	public void setTailPosition(float xT, float yT){
 		for (int i = tailSize-1; i >=1; i--) {
-			if(imagesPositionX.size()!=tailSize){
+			if(imagesPositionX.size()<tailSize){
 				imagesPositionX.add(imagesPositionX.get(i-1));
 				imagesPositionY.add(imagesPositionY.get(i-1));
 			}
@@ -85,37 +85,43 @@ public class Player extends GameObject {
 		time++;
 		if (gc.getInput().isKeyPressed(KeyCode.LEFT.ordinal())) {
 			direction = KeyCode.LEFT.ordinal();
-			this.imageHead = new Image("/mr.nom/headleft.png");
+			
 
 		}
 		if (gc.getInput().isKeyPressed(KeyCode.RIGHT.ordinal())) {
 			direction = KeyCode.RIGHT.ordinal();
-			this.imageHead = new Image("/mr.nom/headright.png");
+			
 
 		}
 		if (gc.getInput().isKeyPressed(KeyCode.UP.ordinal())) {
 			direction = KeyCode.UP.ordinal();
-			this.imageHead = new Image("/mr.nom/headup.png");
+			
 
 		}
 		if (gc.getInput().isKeyPressed(KeyCode.DOWN.ordinal())) {
 			direction = KeyCode.DOWN.ordinal();
-			this.imageHead = new Image("/mr.nom/headdown.png");
+			
 		}
 		if(time > (1/dt/(2.5))){
 			setTailPosition(x,y);
 			time = 0;
 			if (direction == KeyCode.LEFT.ordinal()) {
+				this.imageHead = new Image("/mr.nom/headleft.png");
 				x -= speed;
+				
 			}
 			if (direction == KeyCode.RIGHT.ordinal()) {
+				this.imageHead = new Image("/mr.nom/headright.png");
 				x += speed;
 			}
 			if (direction == KeyCode.UP.ordinal()) {
+				this.imageHead = new Image("/mr.nom/headup.png");
 				y -= speed;
+				
 			}
 			if (direction == KeyCode.DOWN.ordinal()) {
-				y += speed;
+				this.imageHead = new Image("/mr.nom/headdown.png");
+				y += speed;				
 			}
 			if(x>gc.getWidth())
 				x = 0;

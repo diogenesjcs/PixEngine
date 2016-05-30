@@ -10,7 +10,7 @@ public class PlayState extends State {
 	public PlayState() {
 		manager.addObject(new SceneImage("background", "/mr.nom/background.png", 0, 0));
 		manager.addObject(new Player(0, 0));
-		manager.addObject(new Enemy());
+		manager.addObject(new Stain());
 		manager.addObject(new Points("points1","/mr.nom/numbers.png",140,440));
 		manager.addObject(new Points("points2","/mr.nom/numbers.png",160,440));
 		}

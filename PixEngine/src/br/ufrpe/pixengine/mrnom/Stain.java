@@ -8,18 +8,13 @@ import br.ufrpe.pixengine.core.GameContainer;
 import br.ufrpe.pixengine.core.Renderer;
 import javafx.scene.image.Image;
 
-public class Enemy extends GameObject {
-	private GameObject target = null;
+public class Stain extends GameObject {
 	private Image imageStain1;
-	private Image imageStain2;
-	private Image imageStain3;
 
-	public Enemy() {
+	public Stain() {
 		reset();
 		addComponent(new Collider());
 		this.imageStain1 = new Image("/mr.nom/stain1.png");
-		this.imageStain2 = new Image("/mr.nom/stain2.png");
-		this.imageStain3 = new Image("/mr.nom/stain3.png");
 		w = (float) imageStain1.getWidth();
 		h = (float) imageStain1.getHeight();
 	}
