@@ -21,7 +21,7 @@ public class PlayState extends State {
 			gc.getGame().push(new PauseState());
 		}
 		else{
-			int points = ((Player)gc.getGame().peek().getManager().findObject("player")).getTailSize()-2;
+			int points = ((Player)gc.getGame().peek().getManager().findObject("player")).getTailSize()-1;
 			String formated = String.format("%02d", points);
 			int points1 = Integer.parseInt(formated.substring(0,1));
 			int points2 = Integer.parseInt(Character.toString(formated.charAt(1)));

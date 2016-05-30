@@ -53,7 +53,7 @@ public class Player extends GameObject {
 	
 	public void setTailPosition(float xT, float yT){
 		for (int i = tailSize-1; i >=1; i--) {
-			if(imagesPositionX.size()<tailSize){
+			if(imagesPositionX.size()<=tailSize-1){
 				imagesPositionX.add(imagesPositionX.get(i-1));
 				imagesPositionY.add(imagesPositionY.get(i-1));
 			}
