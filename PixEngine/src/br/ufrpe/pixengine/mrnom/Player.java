@@ -19,8 +19,10 @@ public class Player extends GameObject {
 	private int speed;
 	private int direction;
 	private int time;
+	private boolean increase;
 
 	public Player(int x, int y) {
+		increase=false;
 		tailSize = 2;
 		setTag("player");
 		this.imageHead = new Image("/mr.nom/headdown.png");
@@ -103,6 +105,10 @@ public class Player extends GameObject {
 			
 		}
 		if(time > (1/dt/(2.5))){
+			if(increase){
+				this.setTailSize(tailSize+1);
+				increase=false;}
+			
 			setTailPosition(x,y);
 			time = 0;
 			if (direction == KeyCode.LEFT.ordinal()) {
@@ -155,7 +161,7 @@ public class Player extends GameObject {
 
 	public void increaseTailSize() {
 		this.imagesTail.add(new Image("/mr.nom/tail.png"));
-		this.setTailSize(tailSize+1);
+		increase = true;
 	}
 
 	public int getTailSize() {
